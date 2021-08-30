@@ -4,7 +4,11 @@ const hourHand = document.querySelector('.hour');
 const minuteHand = document.querySelector('.minute'); 
 const secondHand = document.querySelector('.second');
 const body = document.querySelector('body');
-const switchContainer = document.querySelector('.dark-mode-container');
+const switchElement = document.querySelector('.dm-switch-container');
+
+switchElement.addEventListener('click', () => {
+    body.classList.toggle('dark-mode-active');
+})
 
 function setDegree(element, ratio) {
     element.style.setProperty('--hand-rotation', `${ratio * 360}deg`);
@@ -20,10 +24,5 @@ function clock() {
     setDegree(minuteHand, minuteRatio);
     setDegree(hourHand, hourRatio);
 }
-
-
-switchContainer.addEventListener('click', () => {
-    body.classList.toggle('dark-mode-active');
-})
 
 clock();

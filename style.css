@@ -19,44 +19,49 @@ body {
 	align-items: center;
 	background-color: var(--white);
 	color: var(--grey);
-	position: relative;
 }
 
-.dark-mode-container {
-	position: absolute;
+.dm-switch-container {
+	position: fixed;
 	top: 20px;
-	right: 20px;
-	width: 50px;
-	height: 25px;
-	border-radius: 40px;
-	background-color: var(--white);
-	border: 1px solid var(--grey);
+	left: 20px;
+	width: 25px;
+	aspect-ratio: 1/1;
 }
 
-.dark-mode-container:hover {
+.dm-switch {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 50%;
+}
+
+.dm-switch:hover {
 	cursor: pointer;
 }
 
-.dark-mode-switch {
-	position: absolute;
-	height: 100%;
-	width: 50%;
+.dm-switch.sun {
 	background-color: yellow;
 	box-shadow: inset -2px -2px 4px orange;
-	border-radius: 50%;
-	transform: scale(0.7);
 }
 
-.dark-mode-switch::after {
+.dm-switch.moon {
+	background-color: var(--white);
+	box-shadow: inset -1px -1px 2px black;
+	transform: translateY(-300%);
+}
+
+.dm-switch.moon::after {
 	content: '';
 	position: absolute;
 	top: 0;
 	right: 0;
 	width: 75%;
 	height: 75%;
-	background-color: var(--black);
+	background-color: var(--white);
 	border-radius: 50%;
-	opacity: 0;
 }
 
 .clock {
@@ -168,9 +173,8 @@ body {
 }
 
 body,
-.dark-mode-container,
-.dark-mode-switch,
-.dark-mode-switch::after,
+.dm-switch,
+.dm-switch.moon::after,
 .clock,
 .clock::after {
 	transition: 1s;
@@ -180,19 +184,16 @@ body.dark-mode-active {
 	background-color: var(--black);
 }
 
-body.dark-mode-active .dark-mode-container {
+body.dark-mode-active .dm-switch-container .dm-switch.sun {
+	transform: translateY(-300%);
+}
+
+body.dark-mode-active .dm-switch-container .dm-switch.moon {
+	transform: translateY(0);
+}
+
+body.dark-mode-active .dm-switch-container .dm-switch.moon::after {
 	background-color: var(--black);
-	border: 1px solid var(--white);
-}
-
-body.dark-mode-active .dark-mode-container .dark-mode-switch {
-	background-color: var(--white);
-	box-shadow: inset -1px -1px 2px black;
-	transform: translateX(100%) scale(0.7);
-}
-
-body.dark-mode-active .dark-mode-container .dark-mode-switch::after {
-	opacity: 1;
 }
 
 body.dark-mode-active .clock {
